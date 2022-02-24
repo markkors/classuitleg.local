@@ -1,20 +1,9 @@
 <?php
+// open de autoloader
 require_once ("includes/autoloader.php");
 
-
-
-
 $request = $_SERVER['REQUEST_URI'];
-
-//var_dump($request);
-
-
-
 $url = parse_url($request);
-
-//var_dump($url);
-
-//echo __DIR__;
 
 switch($url['path']) {
     case '':
