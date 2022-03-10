@@ -6,6 +6,7 @@ class postcode extends database
     {
         // start de constructor van de database class
         parent::__construct();
+
     }
 
     /**
