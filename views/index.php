@@ -53,8 +53,6 @@ if(isset($_POST['provincies'])) {
         array_push($table_rows,$output);
     }
     $gemeentes_html = join("",$table_rows);
-
-
 }
 
 
