@@ -18,6 +18,9 @@ switch($url['path']) {
     case '/about':
         require __DIR__ . '/views/about.php';
         break;
+    case '/api':
+        require __DIR__ . '/includes/api.php';
+        break;
     default:
         require __DIR__ . '/views/404.php';
         break;

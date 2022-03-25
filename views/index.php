@@ -95,6 +95,9 @@ if(isset($_POST['provincies'])) {
 </head>
 <body>
 
+<button onclick="getGemeente(6);alert('zie console voor JSON informatie')">test json (zie console)</button>
+
+
 <form action="/" method="post">
     <select name="provincies" onchange="this.form.submit()">
            <?=$provincies_html?>
@@ -105,6 +108,29 @@ if(isset($_POST['provincies'])) {
     </div>
 
 </form>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded",function() {
+        fetch('http://classuitleg.local/api?provincie')
+            .then(response => response.json())
+            .then(data => console.log(data));
+    });
+
+
+    async function getGemeente(ident) {
+            const object = {id:ident};
+            const response = await fetch('http://classuitleg.local/api?gemeente', {
+                method: 'POST',
+                body: JSON.stringify(object)
+            }).then(response => response.json())
+            .then(data => console.log(data));
+    }
+
+
+
+
+</script>
 
 </body>
 </html>
