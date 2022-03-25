@@ -19,6 +19,4 @@ class klant
         return strtoupper($this->naam);
     }
 
-
-
 }
