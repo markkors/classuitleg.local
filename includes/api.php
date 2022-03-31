@@ -26,5 +26,12 @@ if(isset($url['query'])) {
         echo json_encode($db->getGemeentes($data->id));
     }
 
+    if(isset($a['deletegemeente'])) {
+        // ophalen ID
+        $data = json_decode(file_get_contents("php://input"));
+        http_response_code(201);
+        echo json_encode($db->deleteGemeente($data->id));
+    }
+
 }
 

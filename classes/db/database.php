@@ -55,23 +55,42 @@ class database
         return $result;
     }
 
-public function getGemeentes(int $id) : array {
-    $result = [];
-    $stmt = self::$conn->prepare("SELECT * FROM `gemeente` WHERE ID_provincie = ?;");
-    $stmt->bind_param("i",$id);
+    public function getGemeentes(int $id) : array {
+        $result = [];
+        $stmt = self::$conn->prepare("SELECT * FROM `gemeente` WHERE ID_provincie = ?;");
+        $stmt->bind_param("i",$id);
 
-    if($stmt->execute()) {
-        $data_result = $stmt->get_result();
-        while($row = $data_result->fetch_object()) {
-            $g = new gemeente();
-            $g->id = $row->id;
-            $g->naam = $row->Naam;
-            $g->provincie = $this->getProvincie($id);
-            array_push($result,$g);
+        if($stmt->execute()) {
+            $data_result = $stmt->get_result();
+            while($row = $data_result->fetch_object()) {
+                $g = new gemeente();
+                $g->id = $row->id;
+                $g->naam = $row->Naam;
+                $g->provincie = $this->getProvincie($id);
+                array_push($result,$g);
+            }
         }
+        return $result;
     }
-    return $result;
-}
 
+    public function deleteGemeente($id) : bool {
+        $result = false;
+        $stmt = self::$conn->prepare("DELETE FROM `gemeente` WHERE id = ?;");
+        $stmt->bind_param("i",$id);
+        if($stmt->execute()) {
+            $result = true;
+        }
+        return $result;
+    }
+
+    public function addGemeente($naam,$id) : bool {
+        $result = false;
+        $stmt = self::$conn->prepare("INSERT INTO `gemeente` (`Naam`,`ID_Provincie`) VALUES (?,?);");
+        $stmt->bind_param("si",$naam,$id);
+        if($stmt->execute()) {
+            $result = true;
+        }
+        return $result;
+    }
 
 }
